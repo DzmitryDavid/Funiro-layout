@@ -21,6 +21,7 @@ const include = require('posthtml-include');
 const richtypo = require('posthtml-richtypo');
 const expressions = require('posthtml-expressions');
 const removeAttributes = require('posthtml-remove-attributes');
+const ttf2woff = require('gulp-ttf2woff');
 const { quotes, sectionSigns, shortWords } = require('richtypo-rules-ru');
 
 /**
@@ -115,7 +116,10 @@ function browserSyncReload(done) {
  * @returns {*}
  */
 function copyFonts() {
-  return gulp.src([src.fonts + '/**/*']).pipe(gulp.dest(dist.fonts));
+  return gulp
+    .src([src.fonts + '/**/*'])
+    .pipe(ttf2woff())
+    .pipe(gulp.dest(dist.fonts));
 }
 
 /**
